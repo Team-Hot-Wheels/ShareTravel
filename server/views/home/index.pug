@@ -1,0 +1,12 @@
+extends ../shared/layout
+block main-content
+  h1 Hello from Express!
+    if data
+      ul
+        each trip in data
+         li
+          ul
+            li= trip.username
+            li= trip.from
+            li= trip.to
+            li= trip.date
