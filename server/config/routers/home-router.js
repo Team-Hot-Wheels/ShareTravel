@@ -1,11 +1,13 @@
-const controllers = require('../../controllers');
 const auth = require('../../config/auth');
+const express = require("express");
 
-module.exports = (app) => {
-    app.get('/', controllers.trips.getAll);
-    app.get('/about', controllers.home.about);
+module.exports = (app, data) => {
+    const controllers = require('../../controllers')(data);
+    let router = new express.Router();
+    router
+        .get('/', controllers.getAllTrips)
+        .get('/about', controllers.about)
+        .get('/articles/create', auth.isInRole('Admin'), controllers.createArticle);
 
-    app.get('/articles/create', auth.isInRole('Admin'), controllers.articles.create);
-
-   
+    app.use("/", router);
 };

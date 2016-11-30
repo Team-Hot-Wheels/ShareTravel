@@ -1,23 +1,26 @@
-let Trip = require('../data/Trip');
+let Trip = require('../models/Trip');
 let moment = require('moment');
 
-module.exports = {
-    index: (req, res) => {
-        res.render('trips/trips')
-    },
-    create: (req, res) => {
-        let trip = req.body;
+module.exports = function (data) {
+    return {
+        indexTrip(req, res){
+            res.render('trips/trips')
+        },
+        createTrip(req, res){
+            let trip = req.body;
 
-        Trip
-            .create(trip)
-            .then(
-                () => {
-                    res.redirect('/')
-                })
-    },
-    getAll: (req, res) => {
-        Trip.find((err, trips) => {
-            res.render('home/index', {data: trips});
-        })
-    }
+            data.createTrip(trip)
+                .then(
+                    () => {
+                        res.redirect('/')
+                    })
+        },
+        getAllTrips(req, res) {
+            data.getAllTrips()
+                .then((trips) => {
+                    console.log(trips);
+                    res.render('home/index', {data: trips});
+                });
+        }
+    };
 };

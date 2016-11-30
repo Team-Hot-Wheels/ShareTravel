@@ -25,6 +25,8 @@ userSchema.method({
 
 let User = mongoose.model('User', userSchema)
 
+module.exports = mongoose.model('User', userSchema);
+
 module.exports.seedAdminUser = () => {
     User.find({}).then(users => {
         if (users.length === 0) {
