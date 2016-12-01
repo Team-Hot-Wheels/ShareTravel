@@ -13,6 +13,8 @@ module.exports = (app, data) => {
         .get('/admin/admin-delete-user', auth.isInRole(adminRole), controllers.deleteUserIndex)
         .get('/admin/admin-add-news', auth.isInRole(adminRole), controllers.addNewsIndex)
         .post('/admin/admin-add-news', auth.isInRole(adminRole), controllers.addNews)
+        .post('/admin/admin-delete-news', auth.isInRole(adminRole), controllers.deleteNews)
+        .get('/admin/admin-delete-news', auth.isInRole(adminRole), controllers.deleteNewsIndex)
         .get('/admin', auth.isInRole(adminRole), controllers.indexAdmin);
 
     app.use("/", router);
