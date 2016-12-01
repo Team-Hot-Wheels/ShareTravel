@@ -1,5 +1,6 @@
 let User = require('../models/User');
 let Trip = require('../models/Trip');
+let News = require('../models/News');
 
 module.exports = function (data) {
     return {
@@ -14,7 +15,8 @@ module.exports = function (data) {
                 })
         },
         deleteUser(req, res) {
-            data.deleteUser(req, res).then(() =>
+            let username = req.body.username;
+            data.deleteUser(username).then(() =>
                 res.redirect('/admin/admin-delete-user'));
         },
         deleteTripIndex(req, res) {
@@ -35,6 +37,20 @@ module.exports = function (data) {
         addUser(req, res) {
             // TODO: to refactor
             res.render('admin/admin-add-user');
+        },
+        addNewsIndex(req, res) {
+            res.render('admin/admin-add-news');
+        },
+        addNews(req, res) {
+            let news = req.body;
+            news.createdOn = Date.now();
+
+            data.createNews(news)
+                .then(
+                () => {
+                    req.flash('info', 'Article created.');
+                    res.redirect('/admin/admin-add-news');
+                })
         }
     }
 };

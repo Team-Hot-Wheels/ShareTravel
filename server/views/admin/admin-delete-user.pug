@@ -8,7 +8,7 @@ include admin-main.pug
       th Action:
     tbody  
         each user in data
-         if (user.username === 'Admin')
+         if (user.username === 'admin')
          else
             tr
             td= user.username

@@ -59,9 +59,9 @@ module.exports = function (models) {
             })
         },
         deleteTrip(tripId) {
-            // not working to fix
             return new Promise((resolve, reject) => {
                 Trip.find({ '_id': tripId }).remove().exec();
+                resolve();
             });
         }
     }

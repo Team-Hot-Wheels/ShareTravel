@@ -31,10 +31,10 @@ module.exports.seedAdminUser = () => {
     User.find({}).then(users => {
         if (users.length === 0) {
             let salt = encryption.generateSalt();
-            let hashedPass = encryption.generateHashedPassword(salt, 'Admin12');
+            let hashedPass = encryption.generateHashedPassword(salt, 'admin');
 
             User.create({
-                username: 'Admin',
+                username: 'admin',
                 firstName: 'Admin',
                 lastName: 'Adminov',
                 salt: salt,

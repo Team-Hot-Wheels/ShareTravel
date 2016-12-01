@@ -61,9 +61,9 @@ module.exports = function (models) {
             });
         },
         deleteUser(username) {
-            // not working to fix
             return new Promise((resolve, reject) => {
                 User.find({ 'username': username }).remove().exec();
+                resolve();
             });
         }
     }

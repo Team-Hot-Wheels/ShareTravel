@@ -1,0 +1,14 @@
+include admin-main.pug
+ h2 Add new news-article
+ .col-md-6.col-md-offset-6
+   form.form-horizontal(method="post" action="/admin/admin-add-news")
+          .form-group
+            label.control-label.col-md-3(for="title") Title
+            .col-md-9
+             input.form-control(type="text" name="title" id="title")
+          .form-group
+            label.control-label.col-md-3(for="content") Content
+            .col-md-9
+             textarea.form-control(type="text" name="content" id="content")
+          .form-group
+             input.btn.btn-default.btn-primary(type="submit" value="Create")

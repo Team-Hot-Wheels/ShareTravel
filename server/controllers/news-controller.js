@@ -7,7 +7,6 @@ module.exports = function (data) {
         getAllNews(req, res) {
             data.getAllNews()
                 .then((news) => {
-                    console.log(news);
                     res.render('news/news', { data: news });
                 });
         }
