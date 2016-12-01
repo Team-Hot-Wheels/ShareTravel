@@ -48,6 +48,17 @@ module.exports = function (models) {
                 });
             });
         },
+        getLatestSixTrips() {
+            return new Promise((resolve, reject) => {
+                Trip.find({}).sort('-date').limit(6).exec((err, trips) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(trips);
+                });
+            });
+        },
         findTrips(searchedParameters) {
             return new Promise((resolve, reject) => {
                 Trip.find(searchedParameters, (err, trips) => {

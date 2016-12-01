@@ -25,6 +25,12 @@ module.exports = function (data) {
                     res.render('home/index', { data: trips });
                 });
         },
+        getLatestSixTrips(req, res) {
+            data.getLatestSixTrips()
+                .then((trips) => {
+                    res.render('home/index', { data: trips });
+                });
+        },
         errorTrip(req, res) {
             res.render('/trips/error');
         },
