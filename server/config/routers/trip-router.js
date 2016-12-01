@@ -11,7 +11,8 @@ module.exports = (app, data) => {
         .get('/trips/create', controllers.createTripIndex)
         .post('/trips/create', controllers.createTrip)
         .get('/trips/:id', controllers.getTripById)
-        .get('/trips/error', controllers.errorTrip);
+        .get('/trips/error', controllers.errorTrip)
+        .get('/trips', controllers.getPagedTrips);
 
     app.use("/", router);
 };

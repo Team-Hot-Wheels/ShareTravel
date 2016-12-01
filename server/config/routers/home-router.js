@@ -6,5 +6,6 @@ module.exports = (app, data) => {
     let router = new express.Router();
     router
         .get('/', controllers.getLatestSixTrips)
+        
     app.use("/", router);
 };

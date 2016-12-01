@@ -1,0 +1,42 @@
+extends ../shared/layout
+block main-content
+      h1 Welcome to Travel Share!
+      if data
+      - console.log(data);
+      div.row
+        each trip in data.pagedTrips
+         .col-md-8
+            a.row.trip-list(href='/trips/'+ trip._id)
+              .col-md-2
+                i.fa.fa-user(aria-hidden='true')
+                span= trip.username
+              .col-md-8
+                .col-md-12
+                  i.fa.fa-calendar-o(aria-hidden='true')
+                  span= trip.humanDate
+                .col-md-12
+                 span= trip.from
+                 | ->
+                 span= trip.to
+                .col-md-12
+                  i.fa.fa-map-marker(aria-hidden='true')
+                  span= trip.from
+                .col-md-12
+                  i.fa.fa-map-marker(aria-hidden='true')
+                  span= trip.to
+              .col-md-2
+                div
+               
+                div= trip.price
+                div= trip.slots
+        
+      div.row
+            ul.pagination
+                - for (var x = 0; x < data.totalPages; x++)
+                    if(x==data.pageNumber)
+                        li.active
+                            a(href='/trips?pageNumber='+x)  #{x+1}
+                    else
+                        li
+                            a(href='/trips?pageNumber='+x)  #{x+1}
+      
