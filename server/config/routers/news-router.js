@@ -5,6 +5,6 @@ module.exports = (app, data) => {
     const controllers = require('../../controllers')(data);
     let router = new express.Router();
     // TODO:
-    //router.get('/news/create', auth.isInRole('Admin'), controllers.createNews);
+    router.get('/news', controllers.getAllNews);
     app.use("/", router);
 };
