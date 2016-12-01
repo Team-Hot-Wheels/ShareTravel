@@ -1,3 +1,19 @@
 body {
    padding-top: 70px; 
 }
+.trip-list {
+    text-decoration: none;
+    display: block; 
+    border: 1px solid #999;
+    margin-bottom: 10px;
+    padding: 15px 0 15px 0;
+    font-size: 18px;
+    box-shadow:2px 2px 0 #aaa
+}
+.trip-list:hover {
+    background: lightgray;
+    color: white;
+}
+.trip-list i {
+    margin-left: 3px;
+}

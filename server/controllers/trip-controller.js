@@ -10,8 +10,8 @@ module.exports = function (data) {
             let trip = req.body;
             trip.username = req.user.username;
             if (Date.parse(trip.date) <= Date.now()) {
-                 req.flash('error', 'you must enter a date in the future');
-                 return res.redirect('/trips/create');
+                req.flash('error', 'you must enter a date in the future');
+                return res.redirect('/trips/create');
             }
             data.createTrip(trip)
                 .then(
@@ -28,6 +28,11 @@ module.exports = function (data) {
         getLatestSixTrips(req, res) {
             data.getLatestSixTrips()
                 .then((trips) => {
+                    for (var i = 0; i < trips.length; i += 1) {
+                        var newDate = new Date(trips[i].date);
+                        trips[i].humanDate = moment(newDate).format("DD-MMM-YYYY (dddd)");
+                    }
+
                     res.render('home/index', { data: trips });
                 });
         },
@@ -51,9 +56,9 @@ module.exports = function (data) {
             res.render('trips/search-trips');
         },
         findTrips(req, res) {
-            let from = new RegExp('^'+req.body.from+'.*$', "i");
-            let to = new RegExp('^'+req.body.to+'.*$', "i");
-            
+            let from = new RegExp('^' + req.body.from + '.*$', "i");
+            let to = new RegExp('^' + req.body.to + '.*$', "i");
+
             var searchedParameters = { 'from': from, "to": to, "date": req.body.date };
             // for more flexible search if user doesn't fill in all fields they are removed from search object passed to db
             if (req.body.from.length === 0) {

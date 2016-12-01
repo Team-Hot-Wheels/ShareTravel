@@ -28,8 +28,8 @@ module.exports = (config, app) => {
     app.use(express.static(config.rootPath + 'public'))
     app.use(flash());
     app.use((req, res, next) => {
-        res.locals.error_message = req.flash('error');
-        res.locals.info_message = req.flash('info');
+        res.locals.errorMessage = req.flash('error');
+        res.locals.successMessage = req.flash('success');
         next();
 
     });

@@ -89,7 +89,7 @@ module.exports = function (data) {
                     req.flash('error', err);
                     return res.redirect('/users/update-profile')
                 }
-                req.flash('info', 'You profile has been updated successfully!');
+                req.flash('success', 'You profile has been updated successfully!');
                 res.redirect('/users/update-profile');
             })
         },

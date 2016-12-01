@@ -48,7 +48,7 @@ module.exports = function (data) {
             data.createNews(news)
                 .then(
                 () => {
-                    req.flash('info', 'Article created.');
+                    req.flash('success', 'Article created.');
                     res.redirect('/admin/admin-add-news');
                 })
         }

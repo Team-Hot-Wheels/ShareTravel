@@ -1,19 +1,30 @@
 extends ../shared/layout
 block main-content
-  h1 Welcome to Travel Share!
-    if data
-      ul
+      h1 Welcome to Travel Share!
+      if data
+       
         each trip in data
-         li
-          ul
-            a(href='/trips/'+ trip._id) More info
-            li= trip.username
-            li= trip.from
-            li= trip.to
-            li= trip.date
-            li= trip.price
-            li= trip.slots
-            if (trip.passengers)
-             li= trip.passengers
-            if (trip.description)
-             li= trip.description
+         .col-md-8
+            a.row.trip-list(href='/trips/'+ trip._id)
+              .col-md-2
+                i.fa.fa-user(aria-hidden='true')
+                span= trip.username
+              .col-md-8
+                .col-md-12
+                  i.fa.fa-calendar-o(aria-hidden='true')
+                  span= trip.humanDate
+                .col-md-12
+                 span= trip.from
+                 | ->
+                 span= trip.to
+                .col-md-12
+                  i.fa.fa-map-marker(aria-hidden='true')
+                  span= trip.from
+                .col-md-12
+                  i.fa.fa-map-marker(aria-hidden='true')
+                  span= trip.to
+              .col-md-2
+                div
+               
+                div= trip.price
+                div= trip.slots
