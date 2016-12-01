@@ -1,0 +1,42 @@
+extends ../shared/layout
+block main-content
+ if (data && data.length == 0)
+    h1 No trips found
+
+ if (data && data.length > 0)
+    a(href='/trips/search') New search?
+    h1 You have the following options
+     h2= data.trips
+      ul
+       each trip in data
+         li
+          ul
+            a(href='/trips/'+ trip._id) More info
+            li= trip.username
+            li= trip.from
+            li= trip.to
+            li= trip.date
+            li= trip.price
+            li= trip.slots
+            if (trip.passengers)
+             li= trip.passengers
+            if (trip.description)
+             li= trip.description
+
+ else          
+     h1 Find Trips
+        form(method="post" action="/trips/search-trips")
+            br
+            label(for="from") From
+            br
+            input(type="text" name="from" id="from")
+            br
+            label(for="to") To
+            br
+            input(type="text" name="to" id="to")
+            br
+            label(for="date") Date
+            br
+            input(type="date" name="date" id="date")
+            br
+            input(type="submit" value="Search")

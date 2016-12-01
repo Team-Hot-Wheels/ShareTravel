@@ -6,7 +6,14 @@ block main-content
         each trip in data
          li
           ul
+            a(href='/trips/'+ trip._id) More info
             li= trip.username
             li= trip.from
             li= trip.to
             li= trip.date
+            li= trip.price
+            li= trip.slots
+            if (trip.passengers)
+             li= trip.passengers
+            if (trip.description)
+             li= trip.description

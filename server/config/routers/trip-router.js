@@ -6,8 +6,12 @@ module.exports = (app, data) => {
     let router = new express.Router();
 
     router
-        .get('/trips', controllers.indexTrip)
-        .post('/trips/create', controllers.createTrip);
+        .post('/trips/search-trips', controllers.findTrips)
+        .get('/trips/search', controllers.findTripsIndex)
+        .get('/trips/create', controllers.createTripIndex)
+        .post('/trips/create', controllers.createTrip)
+        .get('/trips/:id', controllers.getTripById)
+        .get('/trips/error', controllers.errorTrip);
 
     app.use("/", router);
 };

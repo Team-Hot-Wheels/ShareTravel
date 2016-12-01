@@ -1,0 +1,27 @@
+include admin-main.pug
+ h2 Add a new user
+ .col-md-6.col-md-offset-6
+   form.form-horizontal(method="post" action="/users/create")
+          .form-group
+            label.control-label.col-md-3(for="username") Username
+            .col-md-9
+             input.form-control(type="text" name="username" id="username")
+          .form-group
+            label.control-label.col-md-3(for="password") Password
+            .col-md-9
+             input.form-control(type="password" name="password" id="password")
+          .form-group
+            label.control-label.col-md-3(for="confirm-password") Confirm Password
+            .col-md-9
+             input.form-control(type="password" name="confirmPassword" id="confirm-password")
+          .form-group
+            label.control-label.col-md-3(for="first-name") First Name
+            .col-md-9
+             input.form-control(type="text" name="firstName" id="first-name")
+          .form-group
+            label.control-label.col-md-3(for="last-name") Last Name
+            .col-md-9
+             input.form-control(type="text" name="lastName" id="last-name")
+          .form-group
+            .col-md-9.col-md-offset-3
+             input.btn.btn-default.btn-primary(type="submit" value="Create")

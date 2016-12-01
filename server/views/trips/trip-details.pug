@@ -1,0 +1,17 @@
+extends ../shared/layout
+block main-content
+ h1 Hello from Trip Details!
+  if(data)
+    ul
+       li= data.username
+       li= data.from
+       li= data.to
+       li= data.date
+       li= data.price
+       li= data.slots
+       if (data.passengers)
+        li= data.passengers
+       if (data.description)
+        li= data.description
+  else
+   h2 Not found  

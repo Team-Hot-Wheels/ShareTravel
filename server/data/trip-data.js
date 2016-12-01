@@ -2,7 +2,7 @@ module.exports = function (models) {
     let {Trip} = models;
 
     return {
-        createTrip(tripToBeCreated){
+        createTrip(tripToBeCreated) {
 
             let username = tripToBeCreated.username,
                 from = tripToBeCreated.from,
@@ -26,7 +26,7 @@ module.exports = function (models) {
                 });
             });
         },
-        getTripById(tripId){
+        getTripById(tripId) {
             return new Promise((resolve, reject) => {
                 Trip.findById(tripId, (err, trip) => {
                     if (err) {
@@ -37,7 +37,7 @@ module.exports = function (models) {
                 });
             });
         },
-        getAllTrips(){
+        getAllTrips() {
             return new Promise((resolve, reject) => {
                 Trip.find((err, trips) => {
                     if (err) {
@@ -47,7 +47,21 @@ module.exports = function (models) {
                     return resolve(trips);
                 });
             });
+        },
+        findTrips(searchedParameters) {
+            return new Promise((resolve, reject) => {
+                Trip.find(searchedParameters, (err, trips) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    resolve(trips)
+                })
+            })
+        },
+        deleteTrip(tripId) {
+            return new Promise((resolve, reject) => {
+                Trip.find({ '_id': tripId }).remove().exec();
+            });
         }
-
     }
 }

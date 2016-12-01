@@ -1,0 +1,30 @@
+extends ../shared/layout
+block main-content
+
+    .container
+        .row
+            .col-md-6.col-md-offset-3
+                .panel.panel-default
+                    .panel-heading Update your profile
+                    .panel-body
+
+                        form.form-horizontal(method="post" action="/users/update-profile")
+                            .form-group
+                                label.control-label.col-md-4(for="first-name") First Name
+                                .col-md-8
+                                    input.form-control(type="text" name="firstName" id="first-name" value=user.firstName)
+                            .form-group
+                                label.control-label.col-md-4(for="last-name") Last Name
+                                .col-md-8
+                                    input.form-control(type="text" name="lastName" id="last-name" value=user.lastName)
+                            .form-group
+                                label.control-label.col-md-4(for="password") Password
+                                .col-md-8
+                                    input.form-control(type="password" name="password" id="password")
+                            .form-group
+                                label.control-label.col-md-4(for="confirm-password") Confirm Password
+                                .col-md-8
+                                    input.form-control(type="password" name="confirmPassword" id="confirm-password")
+                            .form-group
+                                .col-md-8.col-md-offset-4
+                                    input.btn.btn-default.btn-primary(type="submit" value="Update")

@@ -1,0 +1,39 @@
+extends ../shared/layout
+block main-content
+
+    .row
+        .col-md-8.col-md-offset-2
+            .panel.panel-default
+                .panel-heading Add a new trip
+                .panel-body
+                    .col-md-12
+                        #map
+                    br
+                    form(class="form-horizontal" method="post" action="/trips/create")
+                        .col-md-6
+                            .form-group
+                                .col-md-12
+                                    input(type="text" name="from" id="from" class="form-control" placeholder="From" required="required")
+                            .form-group
+                                .col-md-12
+                                    input(type="text" name="to" id="to" class="form-control" placeholder="To" required="required")
+                        .col-md-6
+                            .form-group
+                                .col-md-12
+                                    input(type="text" onfocus="(this.type='date')" name="date" id="date" class="form-control" placeholder="Trip Date" required="required")
+
+                            .form-group
+                                .col-md-6
+                                    input(type="number" name="price"  id="price" class="form-control" placeholder="Price" required="required")
+                                .col-md-6
+                                    input(type="number" min="1" name="slots" id="slots" class="form-control" placeholder="Slots" required="required")
+                        .col-md-12
+                            .form-group
+                                .col-md-12
+                                    textarea(id="description" name="description" class="form-control" rows=8 placeholder="Description" required="required")
+                        .col-md-12
+                            .form-group
+                                .col-md-12
+                                    button(type="submit" class="btn btn-primary") Create
+block footer-js
+    script(src='/js/app.js')

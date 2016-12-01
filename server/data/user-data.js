@@ -2,7 +2,7 @@ module.exports = function (models) {
     let {User} = models;
 
     return {
-        createUser(userToBeCreated){
+        createUser(userToBeCreated) {
             let username = userToBeCreated.username,
                 firstName = userToBeCreated.firstName,
                 lastName = userToBeCreated.lastName,
@@ -27,7 +27,7 @@ module.exports = function (models) {
                 });
             });
         },
-        findUserById(userId){
+        findUserById(userId) {
             return new Promise((resolve, reject) => {
                 User.findById(userId, (err, user) => {
                     if (err) {
@@ -38,9 +38,9 @@ module.exports = function (models) {
                 });
             });
         },
-        findUserByUsername(username){
+        findUserByUsername(username) {
             return new Promise((resolve, reject) => {
-                User.find({username: username}, (err, user) => {
+                User.find({ username: username }, (err, user) => {
                     if (err) {
                         return reject(err);
                     }
@@ -48,7 +48,22 @@ module.exports = function (models) {
                     return resolve(user[0]);
                 });
             });
-        }
+        },
+        getAllUsers() {
+            return new Promise((resolve, reject) => {
+                User.find((err, users) => {
+                    if (err) {
+                        return reject(err);
+                    }
 
+                    return resolve(users);
+                });
+            });
+        },
+        deleteUser(username) {
+            return new Promise((resolve, reject) => {
+                User.find({ 'username': username }).remove().exec();
+            });
+        }
     }
 }

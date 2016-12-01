@@ -1,12 +1,8 @@
 extends ../shared/layout
 block main-content
-  h1 List all trips
   h2 Add a new trip
    if(currentUser)
     form(method="post" action="/trips/create")
-        label(for="username") Username
-        br
-        input(type="text" name="username" id="username" value=username)
         br
         label(for="from") From
         br

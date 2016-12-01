@@ -3,6 +3,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const passport = require('passport');
+const flash = require('connect-flash');
 
 module.exports = (config, app) => {
     app.set('view engine', 'pug');
@@ -25,4 +26,11 @@ module.exports = (config, app) => {
         next()
     });
     app.use(express.static(config.rootPath + 'public'))
+    app.use(flash());
+    app.use((req, res, next) => {
+        res.locals.error_message = req.flash('error');
+        res.locals.info_message = req.flash('info');
+        next();
+
+    });
 };
