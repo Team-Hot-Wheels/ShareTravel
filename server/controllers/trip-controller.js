@@ -42,8 +42,10 @@ module.exports = function (data) {
             res.render('trips/search-trips');
         },
         findTrips(req, res) {
-            console.log(req.body);
-            var searchedParameters = { 'from': req.body.from, "to": req.body.to, "date": req.body.date };
+            let from = new RegExp('^'+req.body.from+'$', "i");
+            let to = new RegExp('^'+req.body.to+'$', "i");
+            
+            var searchedParameters = { 'from': from, "to": to, "date": req.body.date };
             // for more flexible search if user doesn't fill in all fields they are removed from search object passed to db
             if (req.body.from.length === 0) {
                 delete searchedParameters["from"];
