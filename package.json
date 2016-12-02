@@ -4,6 +4,7 @@
     "main": "index.js",
     "license": "MIT",
     "scripts": {
+        "start": "node index.js",
         "dev": "./node_modules/.bin/nodemon index.js",
         "postinstall": "./node_modules/.bin/bower install"
     },
