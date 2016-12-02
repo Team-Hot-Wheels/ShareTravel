@@ -104,7 +104,6 @@ module.exports = function (models) {
                         if (err) console.log(err);
                     });
 
-                console.log('success');
                 resolve();
             })
         }

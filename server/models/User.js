@@ -9,7 +9,9 @@ let userSchema = mongoose.Schema({
     lastName: {type: String, required: requiredValidationMessage},
     salt: String,
     hashedPass: String,
-    roles: [String]
+    roles: [String],
+    tripsAsPassenger: [{}],
+    tripsAsDriver: [{}]
 });
 
 userSchema.method({

@@ -15,8 +15,10 @@ module.exports = function (data) {
             }
             data.createTrip(trip)
                 .then(
-                () => {
-                    res.redirect('/')
+                (trip) => {
+                    data.attachTripToUserAsDriver(trip._id, trip.username, trip.from, trip.to);
+                    req.flash('succes', 'Trip added');
+                    res.redirect('/');
                 })
         },
         getPagedTrips(req, res) {
@@ -132,8 +134,10 @@ module.exports = function (data) {
                     return res.redirect('/trips/' + tripId);
                     // if it is ok to join then user joins the trip
                 } else {
-                    data.saveUserToSpecificTrip(usernameToBeAdded, tripId).then(trip => {
-                        req.flash('success', 'trip joined!')
+                    // nested ugly logic to refactor if possible
+                    data.saveUserToSpecificTrip(usernameToBeAdded, tripId).then(() => {
+                        req.flash('success', 'trip joined!');
+                        data.attachTripToUserAsPassenger(trip._id, usernameToBeAdded, trip.from, trip.to);
                         return res.redirect('/trips/' + tripId);
                     });
                 }

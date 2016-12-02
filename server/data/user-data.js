@@ -65,6 +65,46 @@ module.exports = function (models) {
                 User.find({ 'username': username }).remove().exec();
                 resolve();
             });
+        },
+        attachTripToUserAsDriver(tripId, username, from, to) {
+            return new Promise((resolve, reject) => {
+                User.update({ 'username': username },
+                    {
+                        $push: {
+                            'tripsAsDriver':
+                            {
+                                'tripId': tripId,
+                                'from': from,
+                                'to': to
+                            }
+                        }
+                    },
+                    { upsert: true },
+                    function (err, user) {
+                        if (err) console.log(err);
+                    });
+                resolve();
+            })
+        },
+        attachTripToUserAsPassenger(tripId, username, from, to) {
+            return new Promise((resolve, reject) => {
+                User.update({ 'username': username },
+                    {
+                        $push: {
+                            'tripsAsPassenger':
+                            {
+                                'tripId': tripId,
+                                'from': from,
+                                'to': to
+                            }
+                        }
+                    },
+                    { upsert: true },
+                    function (err, user) {
+                        if (err) console.log(err);
+                    });
+                resolve();
+            })
         }
     }
 }

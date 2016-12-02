@@ -4,3 +4,13 @@ block main-content
   h1 Profile of #{data.username}
    p= data.firstName
    p= data.lastName
+   h2 Trips as driver
+   if (data.tripsAsDriver)
+     each trip in data.tripsAsDriver
+        a(href='/trips/'+ trip.tripId) Trip from #{trip.from} to #{trip.to}
+        br
+   h2 Trips as Passenger
+   if (data.tripsAsPassenger)
+     each trip in data.tripsAsPassenger
+        a(href='/trips/'+ trip.tripId) Trip from #{trip.from} to #{trip.to}
+        br 
