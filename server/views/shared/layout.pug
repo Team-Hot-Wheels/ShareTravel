@@ -2,11 +2,19 @@ doctype
 html
     head
         title Travel Share
-        link(href="/css/bootstrap.css" rel="stylesheet")
+        link(href="/bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet")
         link(href="/css/site.css" rel="stylesheet")
         link(href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet")
+        link(href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet")
     body
-    include _nav.pug
+    header
+        .container
+            .row
+            .col-md-1
+                img(src="/images/share-travel-logo.png")
+            .col-md-5
+                h1.site-name Share Travel
+        include _nav.pug
     .container
 
         include _messages.pug
@@ -17,5 +25,5 @@ html
             block main-content
 
             block footer-js
-    script(src="/js/jquery.js")
-    script(src="/js/bootstrap.js")
+    script(src="/bower_components/jquery/dist/jquery.js")
+    script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
