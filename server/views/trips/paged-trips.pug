@@ -2,7 +2,6 @@ extends ../shared/layout
 block main-content
       h1 Welcome to Travel Share!
       if data
-      - console.log(data);
       div.row
         each trip in data.pagedTrips
          .col-md-8

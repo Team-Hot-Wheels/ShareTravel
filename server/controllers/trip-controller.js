@@ -22,40 +22,40 @@ module.exports = function (data) {
         getPagedTrips(req, res) {
             const pageNumber = +req.query.pageNumber || 0,
                 pageSize = +req.query.pageSize || 5;
-            
-           
+
+
             data.getAllTrips()
                 .then((trips) => {
-                   
-                    
-                          // negative page numbers don't make sense
-            if(pageNumber < 0) {
-                pageNumber = 0;
-            }
 
-            // don't allow negative pages
-            if(pageSize < 0) {
-                pageSize = 5;
-            }
 
-            // it's good practice to have an upped bound on page size, otherwise your endpoint might be exploited
-            if(pageSize > 50) {
-                pageSize = 50;
-            }
-            var pagedTrips = [];
-            var totalPages = Math.ceil(trips.length/pageSize);
-            console.log(pageNumber*pageSize +", " +pageNumber*pageSize+pageSize);
+                    // negative page numbers don't make sense
+                    if (pageNumber < 0) {
+                        pageNumber = 0;
+                    }
 
-            pagedTrips = trips.slice(pageNumber*pageSize,pageNumber*pageSize+pageSize);
-            
-           
-            
-            var tripsForView = {pagedTrips,totalPages,pageNumber};
-          
-            res.render('trips/paged-trips', {data :tripsForView});
-                    
+                    // don't allow negative pages
+                    if (pageSize < 0) {
+                        pageSize = 5;
+                    }
+
+                    // it's good practice to have an upped bound on page size, otherwise your endpoint might be exploited
+                    if (pageSize > 50) {
+                        pageSize = 50;
+                    }
+                    var pagedTrips = [];
+                    var totalPages = Math.ceil(trips.length / pageSize);
+                    console.log(pageNumber * pageSize + ", " + pageNumber * pageSize + pageSize);
+
+                    pagedTrips = trips.slice(pageNumber * pageSize, pageNumber * pageSize + pageSize);
+
+
+
+                    var tripsForView = { pagedTrips, totalPages, pageNumber };
+
+                    res.render('trips/paged-trips', { data: tripsForView });
+
                 });
-      
+
             // data.getPagedTrips(pageNumber, pageSize)
             //     .then((trips) => {
             //      console.log(trips);

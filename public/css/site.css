@@ -31,3 +31,8 @@ body {
 .trip-list i {
     margin-left: 3px;
 }
+#map {
+    height: 200px;
+    width: 100%;
+    margin-bottom: 10px;
+}

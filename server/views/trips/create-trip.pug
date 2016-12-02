@@ -24,7 +24,7 @@ block main-content
 
                             .form-group
                                 .col-md-6
-                                    input(type="number" name="price"  id="price" class="form-control" placeholder="Price" required="required")
+                                    input(type="number" min="0" name="price"  id="price" class="form-control" placeholder="Price" required="required")
                                 .col-md-6
                                     input(type="number" min="1" name="slots" id="slots" class="form-control" placeholder="Slots" required="required")
                         .col-md-12
@@ -36,4 +36,5 @@ block main-content
                                 .col-md-12
                                     button(type="submit" class="btn btn-primary") Create
 block footer-js
-    script(src='/js/app.js')
+    script(src='/js/maps.js')
+    script(async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBlEvejcGuKOU6J8TkM-1lDbjaXpl9SIzg&libraries=places&callback=initMap')
