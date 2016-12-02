@@ -1,7 +1,9 @@
 include admin-main.pug
- h2 Add a new user
- .col-md-6.col-md-offset-6
+ .col-md-12
+  .col-md-6
    form.form-horizontal(method="post" action="/users/create")
+          .col-md-offset-3
+           h2 Add a new user
           .form-group
             label.control-label.col-md-3(for="username") Username
             .col-md-9

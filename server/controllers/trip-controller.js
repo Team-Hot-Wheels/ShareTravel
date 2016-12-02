@@ -44,7 +44,6 @@ module.exports = function (data) {
                     }
                     var pagedTrips = [];
                     var totalPages = Math.ceil(trips.length / pageSize);
-                    console.log(pageNumber * pageSize + ", " + pageNumber * pageSize + pageSize);
 
                     pagedTrips = trips.slice(pageNumber * pageSize, pageNumber * pageSize + pageSize);
 

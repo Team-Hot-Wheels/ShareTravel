@@ -1,6 +1,6 @@
 let encryption = require('../utilities/encryption');
 let User = require('mongoose').model('User');
-
+const auth = require('../config/auth');
 
 module.exports = function (data) {
     return {
@@ -18,14 +18,20 @@ module.exports = function (data) {
 
                 data.createUser(user)
                     .then(user => {
-                        req.logIn(user, (err, user) => {
-                            if (err) {
-                                res.render('users/register', { globalError: 'Ooops 500' });
-                                return
-                            }
+                        if (req.user && req.user.roles[0] === 'Admin') {
+                            req.flash('success', 'User created successfully');
+                            return res.redirect('/admin/admin-add-user');
+                        }
+                        else {
+                            req.logIn(user, (err, user) => {
+                                if (err) {
+                                    res.render('users/register', { globalError: 'Ooops 500' });
+                                    return;
+                                }
 
-                            res.redirect('/')
-                        })
+                                res.redirect('/')
+                            })
+                        }
                     })
             }
         },
@@ -46,7 +52,6 @@ module.exports = function (data) {
                                 res.render('users/login', { globalError: 'Ooops 500' });
                                 return
                             }
-                            console.log(user);
                             res.redirect('/')
                         })
                     }
@@ -94,7 +99,6 @@ module.exports = function (data) {
             })
         },
         editProfile(req, res) {
-            //console.log(req);
             if (req.user) {
                 res.render('users/update-profile', { user: req.user })
             }
