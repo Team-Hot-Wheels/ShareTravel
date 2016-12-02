@@ -6,13 +6,15 @@ nav.navbar.navbar-inverse
                 li.active
                     a(href='/') Home
                 li
-                    a(href='/trips/search') Find a trip  
-                if(currentUser)    
+                    a(href='/trips') All trips
                 li
-                    a(href='/trips/create') Add a new trip  
+                    a(href='/trips/search') Find a trip    
                 li
                     a(href='/news') News
                 
+                if(currentUser)    
+                 li
+                    a(href='/trips/create') Add a new trip
                 if (currentUser && currentUser.username === 'admin')
                  li
                     a(href='/admin') Administration  

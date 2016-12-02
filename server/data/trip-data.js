@@ -37,6 +37,17 @@ module.exports = function (models) {
                 });
             });
         },
+        getPagedTrips(pageNumber, pageSize){
+            return new Promise((resolve, reject) => {
+                Trip.find({}).skip(pageNumber*pageSize).limit(pageSize).exec((err,trips) => {
+                    if(err){
+                        return reject(err);
+                    }
+
+                       return resolve(trips);
+                });
+            });
+        },
         getAllTrips() {
             return new Promise((resolve, reject) => {
                 Trip.find((err, trips) => {
