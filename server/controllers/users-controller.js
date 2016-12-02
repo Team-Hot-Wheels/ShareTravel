@@ -42,9 +42,13 @@ module.exports = function (data) {
 
             data.findUserByUsername(inputUser.username)
                 .then((user) => {
-
+                    if (!user) {
+                        req.flash('error', 'Username not found!');
+                        res.render('users/login')
+                    }
                     if (!user.authenticate(inputUser.password)) {
-                        res.render('users/login', { globalError: 'Invalid username or password' })
+                        req.flash('error', 'Invalid username or password')
+                        res.render('users/login')
                     } else {
                         req.logIn(user, (err, user) => {
                             if (err) {
