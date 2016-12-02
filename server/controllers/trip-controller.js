@@ -119,6 +119,26 @@ module.exports = function (data) {
                         data: tripCollection
                     });
                 });
+        },
+        joinTrip(req, res) {
+            var usernameToBeAdded = req.body.username;
+            var tripId = req.body.tripId;
+
+
+            // validate if user is trying to join a trip created by himself or herself
+            data.getTripById(tripId).then(trip => {
+                if (trip.username === usernameToBeAdded) {
+                    req.flash('error', 'you cannot join your own trip');
+                    return res.redirect('/trips/' + tripId);
+                    // if it is ok to join then user joins the trip
+                } else {
+                    data.saveUserToSpecificTrip(usernameToBeAdded, tripId).then(trip => {
+                        req.flash('success', 'trip joined!')
+                        return res.redirect('/trips/' + tripId);
+                    });
+                }
+            })
+
         }
     };
 };

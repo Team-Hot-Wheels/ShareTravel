@@ -3,15 +3,25 @@ block main-content
  h1 Hello from Trip Details!
   if(data)
     ul
+       - var tripContainsViewingUser = false
+       if (data.passengers && currentUser)
+        each passenger in data.passengers
+         if (passenger === currentUser.username) 
+          - tripContainsViewingUser = true
        li= data.username
        li= data.from
        li= data.to
        li= data.date
        li= data.price
        li= data.slots
-       if (data.passengers)
-        li= data.passengers
+       if (currentUser && data.slots > 0 && !tripContainsViewingUser)
+            form(method="post" action="/trips/join-trip")
+             input(type="hidden" name="username" value=currentUser.username)
+             input(type="hidden" name="tripId" value=data._id)
+             input(type="submit" value="Book a place now")
        if (data.description)
         li= data.description
+       if (data.passengers)
+        li= data.passengers
   else
    h2 Not found  

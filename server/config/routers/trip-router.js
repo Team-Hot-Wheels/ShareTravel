@@ -6,6 +6,7 @@ module.exports = (app, data) => {
     let router = new express.Router();
 
     router
+        .post('/trips/join-trip', controllers.joinTrip)
         .post('/trips/search-trips', controllers.findTrips)
         .get('/trips/search', controllers.findTripsIndex)
         .get('/trips/create', controllers.createTripIndex)

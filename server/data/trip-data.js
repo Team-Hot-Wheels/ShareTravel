@@ -7,13 +7,19 @@ module.exports = function (models) {
             let username = tripToBeCreated.username,
                 from = tripToBeCreated.from,
                 to = tripToBeCreated.to,
-                date = tripToBeCreated.date;
+                date = tripToBeCreated.date,
+                price = tripToBeCreated.price,
+                slots = tripToBeCreated.slots,
+                passengers = [];
 
             var trip = new Trip({
                 username,
                 from,
                 to,
-                date
+                date,
+                price,
+                slots,
+                passengers
             });
 
             return new Promise((resolve, reject) => {
@@ -37,14 +43,14 @@ module.exports = function (models) {
                 });
             });
         },
-        getPagedTrips(pageNumber, pageSize){
+        getPagedTrips(pageNumber, pageSize) {
             return new Promise((resolve, reject) => {
-                Trip.find({}).skip(pageNumber*pageSize).limit(pageSize).exec((err,trips) => {
-                    if(err){
+                Trip.find({}).skip(pageNumber * pageSize).limit(pageSize).exec((err, trips) => {
+                    if (err) {
                         return reject(err);
                     }
 
-                       return resolve(trips);
+                    return resolve(trips);
                 });
             });
         },
@@ -85,6 +91,22 @@ module.exports = function (models) {
                 Trip.find({ '_id': tripId }).remove().exec();
                 resolve();
             });
+        },
+        saveUserToSpecificTrip(usernameToBeAdded, tripId) {
+            // single responsibility is broken -> method does two things 
+            // 1. join a user to specific trip
+            // 2. decrement free slots in order to provide accurate info to app users
+            return new Promise((resolve, reeject) => {
+                Trip.update({ '_id': tripId },
+                    { $push: { 'passengers': usernameToBeAdded }, $inc: { 'slots': -1 } },
+                    { upsert: true },
+                    function (err, trip) {
+                        if (err) console.log(err);
+                    });
+
+                console.log('success');
+                resolve();
+            })
         }
     }
 }

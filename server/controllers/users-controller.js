@@ -28,7 +28,6 @@ module.exports = function (data) {
                                     res.render('users/register', { globalError: 'Ooops 500' });
                                     return;
                                 }
-
                                 res.redirect('/')
                             })
                         }

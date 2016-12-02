@@ -37,7 +37,6 @@ function initMap() {
     origin_autocomplete.addListener('place_changed', function () {
 
         var place = origin_autocomplete.getPlace();
-        console.log(place);
         if (!place.geometry) {
             window.alert("Autocomplete's returned place contains no geometry");
             return;
