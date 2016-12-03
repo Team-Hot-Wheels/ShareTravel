@@ -1,42 +1,50 @@
 extends ../shared/layout
 block main-content
- if (data && data.length == 0)
+ 
+  .row.container.find-trip-container  
+      h2.find-header Find a Trip       
+      form.form-inline(method="post" action="/trips/search-trips")
+
+        .form-group
+          label(for="from") From:  
+          input.form-control(type="text" name="from" id="from")
+        .form-group
+          label(for="to") To:  
+          input.form-control(type="text" name="to" id="to")
+        .form-group
+          label(for="date") Date:  
+          input.form-control(type="date" name="date" id="date")
+        button.btn.btn-primary.btn-search(type="submit") 
+          i.glyphicon.glyphicon-search Find
+
+
+  if (data && data.length == 0)
     h1 No trips found
-
- if (data && data.length > 0)
-    a(href='/trips/search') New search?
-    h1 You have the following options
-     h2= data.trips
-      ul
-       each trip in data
-         li
-          ul
-            a(href='/trips/'+ trip._id) More info
-            li= trip.username
-            li= trip.from
-            li= trip.to
-            li= trip.date
-            li= trip.price
-            li= trip.slots
-            if (trip.passengers)
-             li= trip.passengers
-            if (trip.description)
-             li= trip.description
-
- else          
-     h1 Find Trips
-        form(method="post" action="/trips/search-trips")
-            br
-            label(for="from") From
-            br
-            input(type="text" name="from" id="from")
-            br
-            label(for="to") To
-            br
-            input(type="text" name="to" id="to")
-            br
-            label(for="date") Date
-            br
-            input(type="date" name="date" id="date")
-            br
-            input(type="submit" value="Search")
+  if (data && data.length > 0)
+   .row.container.trip-list
+        each trip in data
+         .row.container.trip-item
+            a(href='/trips/'+ trip._id)
+              .col-md-2
+                i.fa.fa-user(aria-hidden='true')
+                span= trip.username
+              .col-md-8
+                .col-md-12.trip-date
+                  i.fa.fa-calendar-o(aria-hidden='true')
+                  span= trip.humanDate
+                .col-md-12.trip-from-to
+                 span= trip.from
+                 |   ->  
+                 span= trip.to
+                .col-md-12
+                  i.fa.fa-map-marker.trip-from(aria-hidden='true')
+                  span= trip.from
+                .col-md-12
+                  i.fa.fa-map-marker.trip-to(aria-hidden='true')
+                  span= trip.to
+              .col-md-2             
+                div.trip-price.text-right= trip.price
+                   span  lv
+                 
+                div.trip-seats.text-right= trip.slots
+                div.text-right seats available

@@ -2,6 +2,15 @@ body {
     color: #555
 }
 
+a {
+    color: #555
+}
+
+.glyphicon,
+.fa {
+    padding-right: 15px;
+}
+
 .navbar {
     font-size: 18px;
     border-radius: 0px;
@@ -13,24 +22,70 @@ body {
     padding-top: 10px;
 }
 
-.trip-list {
+.find-trip-container {
+    background-color: #00a5a9;
+    margin-bottom: 15px;
+    padding: 20px;
+    font-size: 18px;
+}
+
+.find-header {
+    margin-left: 15px;
+}
+
+.form-group {
+    margin: 0 15px;
+}
+
+label {
+    margin-right: 10px;
+}
+
+.btn-search {
+    background-color: #07829a;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.trip-item {
     text-decoration: none;
-    display: block;
     border: 1px solid #999;
     margin-bottom: 10px;
-    padding: 15px 0 15px 0;
+    padding: 20px 10px;
     font-size: 18px;
-    box-shadow: 2px 2px 0 #aaa
 }
 
-.trip-list:hover {
+.trip-item:hover {
     background: lightgray;
-    color: white;
 }
 
-.trip-list i {
-    margin-left: 3px;
+.trip-date {
+    font-size: 25px;
 }
+
+.trip-from-to {
+    font-weight: bold;
+}
+
+.trip-from {
+    color: darkblue;
+}
+
+.trip-to {
+    color: green;
+}
+
+.trip-price {
+    font-size: 30px;
+    color: green;
+    font-weight: bold;
+}
+
+.trip-seats {
+    font-size: 25px;
+    font-weight: bold;
+}
+
 #map {
     height: 200px;
     width: 100%;

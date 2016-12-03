@@ -1,7 +1,7 @@
 let Trip = require('../models/Trip');
 let moment = require('moment');
 
-module.exports = function (data) {
+module.exports = function(data) {
     return {
         createTripIndex(req, res) {
             res.render('trips/create-trip')
@@ -15,11 +15,11 @@ module.exports = function (data) {
             }
             data.createTrip(trip)
                 .then(
-                (trip) => {
-                    data.attachTripToUserAsDriver(trip._id, trip.username, trip.from, trip.to);
-                    req.flash('succes', 'Trip added');
-                    res.redirect('/');
-                })
+                    (trip) => {
+                        data.attachTripToUserAsDriver(trip._id, trip.username, trip.from, trip.to);
+                        req.flash('succes', 'Trip added');
+                        res.redirect('/');
+                    })
         },
         getPagedTrips(req, res) {
             const pageNumber = +req.query.pageNumber || 0,
@@ -28,8 +28,10 @@ module.exports = function (data) {
 
             data.getAllTrips()
                 .then((trips) => {
-
-
+                    for (var i = 0; i < trips.length; i += 1) {
+                        var newDate = new Date(trips[i].date);
+                        trips[i].humanDate = moment(newDate).format("DD-MMM-YYYY (dddd)");
+                    }
                     // negative page numbers don't make sense
                     if (pageNumber < 0) {
                         pageNumber = 0;
@@ -116,6 +118,10 @@ module.exports = function (data) {
                     if (tripCollection === null) {
                         return res.status(404)
                             .redirect('trips/error');
+                    }
+                    for (var i = 0; i < tripCollection.length; i += 1) {
+                        var newDate = new Date(tripCollection[i].date);
+                        tripCollection[i].humanDate = moment(newDate).format("DD-MMM-YYYY (dddd)");
                     }
                     res.render('trips/search-trips', {
                         data: tripCollection
