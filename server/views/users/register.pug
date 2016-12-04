@@ -4,30 +4,25 @@ block main-content
   .row
    .col-md-4.col-md-offset-4
     .panel.panel-default
-      .panel-heading Create new user
-      .panel-body  
+      .panel-heading.text-center Create new user
+      .panel-body
 
-        form.form-horizontal(method="post" action="/users/create")
-          .form-group
-            label.control-label.col-md-3(for="username") Username
-            .col-md-9
-             input.form-control(type="text" name="username" id="username")
-          .form-group
-            label.control-label.col-md-3(for="password") Password
-            .col-md-9
-             input.form-control(type="password" name="password" id="password")
-          .form-group
-            label.control-label.col-md-3(for="confirm-password") Confirm Password
-            .col-md-9
-             input.form-control(type="password" name="confirmPassword" id="confirm-password")
-          .form-group
-            label.control-label.col-md-3(for="first-name") First Name
-            .col-md-9
-             input.form-control(type="text" name="firstName" id="first-name")
-          .form-group
-            label.control-label.col-md-3(for="last-name") Last Name
-            .col-md-9
-             input.form-control(type="text" name="lastName" id="last-name")
-          .form-group
-            .col-md-9.col-md-offset-3
-             input.btn.btn-default.btn-primary(type="submit" value="Create")
+        form.form-default(method="post" action="/users/create")
+          .fieldset
+            .form-group
+              label.control-label(for="username") Username:
+              input.form-control(type="text" name="username" id="username")
+            .form-group
+              label.control-label(for="password") Password:
+              input.form-control(type="password" name="password" id="password")
+            .form-group
+              label.control-label(for="confirm-password") Confirm Password:
+              input.form-control(type="password" name="confirmPassword" id="confirm-password")
+            .form-group
+              label.control-label(for="first-name") First Name:
+              input.form-control(type="text" name="firstName" id="first-name")
+            .form-group
+              label.control-label(for="last-name") Last Name:
+              input.form-control(type="text" name="lastName" id="last-name")
+            .form-group
+              button.btn.btn-primary.btn-register.col-md-12(type="submit") Create

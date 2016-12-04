@@ -27,15 +27,16 @@ block main-content
             a(href='/trips/'+ trip._id)
               .col-md-2
                 i.fa.fa-user(aria-hidden='true')
-                span= trip.username
+                div= trip.username
+
               .col-md-8
                 .col-md-12.trip-date
                   i.fa.fa-calendar-o(aria-hidden='true')
                   span= trip.humanDate
                 .col-md-12.trip-from-to
-                 span= trip.from
-                 |   ->  
-                 span= trip.to
+                  span= trip.from
+                  |   ->  
+                  span= trip.to
                 .col-md-12
                   i.fa.fa-map-marker.trip-from(aria-hidden='true')
                   span= trip.from

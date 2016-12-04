@@ -1,19 +1,44 @@
 body {
-    color: #555
+    color: #555;
 }
 
 a {
-    color: #555
+    color: #555;
 }
 
-.glyphicon,
-.fa {
+a:hover {
+    color: #555;
+}
+
+.panel-heading {
+    font-weight: bold;
+    color: #07829a;
+}
+
+.btn-primary {
+    background-color: #006ac3;
+}
+
+.btn-primary:hover {
+    background-color: #003588;
+}
+
+.glyphicon {
     padding-right: 15px;
+}
+
+.fa {
+    padding: 0 15px;
 }
 
 .navbar {
     font-size: 18px;
     border-radius: 0px;
+    background-color: #003588;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #e5e5e5;
 }
 
 .site-name {
@@ -23,7 +48,7 @@ a {
 }
 
 .find-trip-container {
-    background-color: #00a5a9;
+    background-color: #00a0ef;
     margin-bottom: 15px;
     padding: 20px;
     font-size: 18px;
@@ -42,7 +67,6 @@ label {
 }
 
 .btn-search {
-    background-color: #07829a;
     font-weight: bold;
     font-size: 18px;
 }
@@ -65,19 +89,20 @@ label {
 
 .trip-from-to {
     font-weight: bold;
+    padding-left: 15px;
 }
 
 .trip-from {
-    color: darkblue;
+    color: #006ac3;
 }
 
 .trip-to {
-    color: green;
+    color: #5cad29;
 }
 
 .trip-price {
     font-size: 30px;
-    color: green;
+    color: #5cad29;
     font-weight: bold;
 }
 
@@ -86,8 +111,19 @@ label {
     font-weight: bold;
 }
 
+.trip-passengers>ul>li {
+    list-style-type: none;
+    padding-left: none;
+}
+
 #map {
     height: 200px;
     width: 100%;
     margin-bottom: 10px;
+}
+
+.btn-login,
+.btn-create,
+.register {
+    margin: 15px 0;
 }
