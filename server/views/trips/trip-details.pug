@@ -22,6 +22,8 @@ block main-content
        if (data.description)
         li= data.description
        if (data.passengers)
-        li= data.passengers
+        each passenger in data.passengers
+         li
+          a(href="/users/" + passenger) #{passenger}
   else
    h2 Not found  
