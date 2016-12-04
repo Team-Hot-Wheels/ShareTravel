@@ -6,11 +6,12 @@ module.exports = {
     development: {
         rootPath: rootPath,
         db: 'mongodb://localhost:27017/TravelShareDb',
+        // db: 'mongodb://admin:admin@ds119718.mlab.com:19718/travelsharedb',
         port: 1337
     },
     production: {
         rootPath: rootPath,
-        db: process.env.MONGO_DB_CONN_STRING,
+        db: 'mongodb://admin:admin@ds119718.mlab.com:19718/travelsharedb',
         port: process.env.port
     }
 };

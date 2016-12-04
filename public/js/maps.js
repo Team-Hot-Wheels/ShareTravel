@@ -73,7 +73,7 @@ function initMap() {
         directionsService.route({
             origin: { 'placeId': origin_place_id },
             destination: { 'placeId': destination_place_id },
-            travelMode: travel_mode
+            travelMode: travel_mode,
         }, function (response, status) {
             if (status === 'OK') {
                 directionsDisplay.setDirections(response);

@@ -6,16 +6,16 @@ module.exports = (app, data) => {
     let router = new express.Router();
 
     router
-        .post('/users/rating/', controllers.updateRating)
+        .post('/users/rating/', auth.isAuthenticated, controllers.updateRating)
         .get('/users/register', controllers.register)
         .post('/users/create', controllers.createUser)
         .get('/users/login', controllers.login)
         .post('/users/authenticate', controllers.authenticate)
         .post('/users/logout', controllers.logout)
-        .get('/users/update-profile', controllers.editProfile)
-        .post('/users/update-profile', controllers.updateProfile)
+        .get('/users/update-profile', auth.isAuthenticated, controllers.editProfile)
+        .post('/users/update-profile', auth.isAuthenticated, controllers.updateProfile)
         .get('/users/top', controllers.getTopUsers)
-        .get('/users/:username', controllers.getByUsername)
+        .get('/users/:username', auth.isAuthenticated, controllers.getByUsername)
 
         .all('*', (req, res) => {
             res.status(404);

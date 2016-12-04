@@ -6,11 +6,11 @@ module.exports = (app, data) => {
     let router = new express.Router();
 
     router
-        .post('/trips/join-trip', controllers.joinTrip)
+        .post('/trips/join-trip', auth.isAuthenticated, controllers.joinTrip)
         .post('/trips/search-trips', controllers.findTrips)
         .get('/trips/search', controllers.findTripsIndex)
-        .get('/trips/create', controllers.createTripIndex)
-        .post('/trips/create', controllers.createTrip)
+        .get('/trips/create', auth.isAuthenticated, controllers.createTripIndex)
+        .post('/trips/create', auth.isAuthenticated, controllers.createTrip)
         .get('/trips/:id', controllers.getTripById)
         .get('/trips/error', controllers.errorTrip)
         .get('/trips', controllers.getPagedTrips);
