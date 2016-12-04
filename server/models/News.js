@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 let newsSchema = mongoose.Schema({
-    title: { type: String },
-    content: { type: String },
-    createdOn: { type: Date }
+    title: {type: String},
+    content: {type: String},
+    createdOn: {type: Date}
 });
 
 mongoose.model("News", newsSchema);

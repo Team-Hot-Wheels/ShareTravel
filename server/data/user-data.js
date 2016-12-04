@@ -40,7 +40,7 @@ module.exports = function (models) {
         },
         findUserByUsername(username) {
             return new Promise((resolve, reject) => {
-                User.find({ username: username }, (err, user) => {
+                User.find({username: username}, (err, user) => {
                     if (err) {
                         return reject(err);
                     }
@@ -62,24 +62,23 @@ module.exports = function (models) {
         },
         deleteUser(username) {
             return new Promise((resolve, reject) => {
-                User.find({ 'username': username }).remove().exec();
+                User.find({'username': username}).remove().exec();
                 resolve();
             });
         },
         attachTripToUserAsDriver(tripId, username, from, to) {
             return new Promise((resolve, reject) => {
-                User.update({ 'username': username },
+                User.update({'username': username},
                     {
                         $push: {
-                            'tripsAsDriver':
-                            {
+                            'tripsAsDriver': {
                                 'tripId': tripId,
                                 'from': from,
                                 'to': to
                             }
                         }
                     },
-                    { upsert: true },
+                    {upsert: true},
                     function (err, user) {
                         if (err) console.log(err);
                     });
@@ -88,23 +87,37 @@ module.exports = function (models) {
         },
         attachTripToUserAsPassenger(tripId, username, from, to) {
             return new Promise((resolve, reject) => {
-                User.update({ 'username': username },
+                User.update({'username': username},
                     {
                         $push: {
-                            'tripsAsPassenger':
-                            {
+                            'tripsAsPassenger': {
                                 'tripId': tripId,
                                 'from': from,
                                 'to': to
                             }
                         }
                     },
-                    { upsert: true },
+                    {upsert: true},
                     function (err, user) {
                         if (err) console.log(err);
                     });
                 resolve();
             })
+        },
+        updateUserRating(userId, rating, giveUserId){
+            return new Promise((resolve, reject) => {
+                User.findByIdAndUpdate(userId, {$push: {ratings: {userId: giveUserId, rating}}}, {
+                    safe: true,
+                    upsert: true,
+                    new: true
+                }, (err, user) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(user);
+                });
+            });
         }
     }
 }

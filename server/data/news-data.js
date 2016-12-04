@@ -28,7 +28,7 @@ module.exports = function (models) {
         },
         deleteNews(newsId) {
             return new Promise((resolve, reject) => {
-                News.find({ '_id': newsId }).remove().exec();
+                News.find({'_id': newsId}).remove().exec();
                 resolve();
             });
         }

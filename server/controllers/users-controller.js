@@ -25,7 +25,7 @@ module.exports = function (data) {
                         else {
                             req.logIn(user, (err, user) => {
                                 if (err) {
-                                    res.render('users/register', { globalError: 'Ooops 500' });
+                                    res.render('users/register', {globalError: 'Ooops 500'});
                                     return;
                                 }
                                 res.redirect('/')
@@ -52,7 +52,7 @@ module.exports = function (data) {
                     } else {
                         req.logIn(user, (err, user) => {
                             if (err) {
-                                res.render('users/login', { globalError: 'Ooops 500' });
+                                res.render('users/login', {globalError: 'Ooops 500'});
                                 return
                             }
                             res.redirect('/')
@@ -72,8 +72,16 @@ module.exports = function (data) {
                         return res.status(404)
                             .redirect("trips/error");
                     }
+                    let userToJson = user.toJSON();
+                    if (user.isVotedAlready(req.user._id)) {
+                        userToJson.isVoted = true;
+                    }
+                    else {
+                        userToJson.isVoted = false;
+                    }
+                    
                     return res.render('users/profile', {
-                        data: user
+                        data: userToJson
                     });
                 });
 
@@ -92,7 +100,7 @@ module.exports = function (data) {
                 }
             }
             // TODO: extract to data layer
-            User.update({ _id: req.user._id }, user, (err) => {
+            User.update({_id: req.user._id}, user, (err) => {
                 if (err) {
                     req.flash('error', err);
                     return res.redirect('/users/update-profile')
@@ -103,11 +111,52 @@ module.exports = function (data) {
         },
         editProfile(req, res) {
             if (req.user) {
-                res.render('users/update-profile', { user: req.user })
+                res.render('users/update-profile', {user: req.user})
             }
             else {
                 return res.redirect('/users/login');
             }
+        },
+        updateRating(req, res) {
+            if (req.user) {
+                data.findUserById(req.body.id)
+                    .then((user) => {
+                        if (user.isVotedAlready(req.user._id)) {
+                            return res.status(403).json({
+                                error: 'forbiden request',
+                                message: 'you have already voted for this user'
+                            });
+                        }
+                        else {
+                            let rating = +req.body.rating
+                            data.updateUserRating(req.body.id, rating, req.user._id)
+                                .then((user)=> {
+                                    req.flash('success', 'Thank you for your rating');
+                                    return res.status(200);
+                                })
+                        }
+                    })
+            }
+            else {
+                req.flash('error', 'You are not authorized to give your rating');
+                return res.status(403)
+                    .redirect("/");
+            }
+        },
+        getTopUsers(req, res){
+            data.getAllUsers()
+                .then((users) => {
+                    let data = users.map(function (x) {
+                        return {
+                            id: x._id,
+                            username: x.username,
+                            rating: x.calculateRating()
+                        }
+                    }).sort(function (a, b) {
+                        return (a.rating > b.rating) ? -1 : ((b.rating > a.rating) ? 1 : 0);
+                    }).slice(0, 10);
+                    res.render('users/top', {data: data});
+                });
         }
     }
 };

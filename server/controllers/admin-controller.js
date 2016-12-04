@@ -11,7 +11,7 @@ module.exports = function (data) {
         deleteUserIndex(req, res) {
             data.getAllUsers(req, res)
                 .then(users => {
-                    res.render('admin/admin-delete-user', { data: users });
+                    res.render('admin/admin-delete-user', {data: users});
                 })
         },
         deleteUser(req, res) {
@@ -21,7 +21,7 @@ module.exports = function (data) {
         },
         deleteTripIndex(req, res) {
             data.getAllTrips().then(trips => {
-                res.render('admin/admin-delete-trip', { data: trips });
+                res.render('admin/admin-delete-trip', {data: trips});
             })
         },
         deleteTrip(req, res) {
@@ -47,10 +47,10 @@ module.exports = function (data) {
 
             data.createNews(news)
                 .then(
-                () => {
-                    req.flash('success', 'Article created.');
-                    res.redirect('/admin/admin-add-news');
-                })
+                    () => {
+                        req.flash('success', 'Article created.');
+                        res.redirect('/admin/admin-add-news');
+                    })
         }
     }
 };

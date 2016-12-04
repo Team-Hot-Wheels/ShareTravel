@@ -3,7 +3,7 @@ module.exports = function (data) {
         getAllNews(req, res) {
             data.getAllNews()
                 .then((news) => {
-                    res.render('news/news', { data: news });
+                    res.render('news/news', {data: news});
                 });
         },
         deleteNews(req, res) {
@@ -14,7 +14,7 @@ module.exports = function (data) {
         deleteNewsIndex(req, res) {
             data.getAllNews()
                 .then((news) => {
-                    res.render('admin/admin-delete-news', { data: news });
+                    res.render('admin/admin-delete-news', {data: news});
                 });
         }
     }

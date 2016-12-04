@@ -88,7 +88,7 @@ module.exports = function (models) {
         },
         deleteTrip(tripId) {
             return new Promise((resolve, reject) => {
-                Trip.find({ '_id': tripId }).remove().exec();
+                Trip.find({'_id': tripId}).remove().exec();
                 resolve();
             });
         },
@@ -97,9 +97,9 @@ module.exports = function (models) {
             // 1. join a user to specific trip
             // 2. decrement free slots in order to provide accurate info to app users
             return new Promise((resolve, reeject) => {
-                Trip.update({ '_id': tripId },
-                    { $push: { 'passengers': usernameToBeAdded }, $inc: { 'slots': -1 } },
-                    { upsert: true },
+                Trip.update({'_id': tripId},
+                    {$push: {'passengers': usernameToBeAdded}, $inc: {'slots': -1}},
+                    {upsert: true},
                     function (err, trip) {
                         if (err) console.log(err);
                     });

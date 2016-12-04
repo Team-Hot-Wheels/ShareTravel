@@ -1,7 +1,7 @@
 let Trip = require('../models/Trip');
 let moment = require('moment');
 
-module.exports = function(data) {
+module.exports = function (data) {
     return {
         createTripIndex(req, res) {
             res.render('trips/create-trip')
@@ -22,7 +22,7 @@ module.exports = function(data) {
                     })
         },
         getPagedTrips(req, res) {
-            const pageNumber = +req.query.pageNumber || 0,
+            let pageNumber = +req.query.pageNumber || 0,
                 pageSize = +req.query.pageSize || 5;
 
 
@@ -52,10 +52,9 @@ module.exports = function(data) {
                     pagedTrips = trips.slice(pageNumber * pageSize, pageNumber * pageSize + pageSize);
 
 
+                    var tripsForView = {pagedTrips, totalPages, pageNumber};
 
-                    var tripsForView = { pagedTrips, totalPages, pageNumber };
-
-                    res.render('trips/paged-trips', { data: tripsForView });
+                    res.render('trips/paged-trips', {data: tripsForView});
 
                 });
 
@@ -73,7 +72,7 @@ module.exports = function(data) {
                         trips[i].humanDate = moment(newDate).format("DD-MMM-YYYY (dddd)");
                     }
 
-                    res.render('home/index', { data: trips });
+                    res.render('home/index', {data: trips});
                 });
         },
         errorTrip(req, res) {
@@ -99,7 +98,7 @@ module.exports = function(data) {
             let from = new RegExp('^' + req.body.from + '.*$', "i");
             let to = new RegExp('^' + req.body.to + '.*$', "i");
 
-            var searchedParameters = { 'from': from, "to": to, "date": req.body.date };
+            var searchedParameters = {'from': from, "to": to, "date": req.body.date};
             // for more flexible search if user doesn't fill in all fields they are removed from search object passed to db
             if (req.body.from.length === 0) {
                 delete searchedParameters["from"];

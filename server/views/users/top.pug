@@ -1,0 +1,14 @@
+extends ../shared/layout
+block main-content
+      h1 Top 10 Travellers
+      if data
+      div.row
+        each user in data
+         .col-md-8
+            a.row.trip-list(href='/users/'+ user.username)
+              .col-md-2
+                i.fa.fa-user(aria-hidden='true')
+                span= user.username
+              .col-md-8
+                .col-md-12
+                 span #{user.rating} rating
