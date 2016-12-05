@@ -4,7 +4,7 @@ module.exports = function (models) {
     return {
         createNews(article) {
             let news = new News(article);
-
+            
             return new Promise((resolve, reject) => {
                 news.save((err) => {
                     if (err) {
