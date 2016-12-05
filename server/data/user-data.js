@@ -1,4 +1,5 @@
-const validator = require('../utilities/validator')
+const validator = require('../utilities/validator');
+
 module.exports = function (models) {
     let {User} = models;
 
@@ -11,24 +12,24 @@ module.exports = function (models) {
                 hashedPass = userToBeCreated.hashedPass;
 
             if (username.length < 4 || username.length > 10) {
-                return Promise.reject({reason: 'username must be between 4 to 10 symbols'})
+                return Promise.reject({reason: 'username must be between 4 to 10 symbols'});
             }
 
             if (firstName.length < 3 || firstName.length > 10) {
-                return Promise.reject({reason: 'First name must be between 3 to 10 symbols'})
+                return Promise.reject({reason: 'First name must be between 3 to 10 symbols'});
             }
             if (username.length < 3 || username.length > 10) {
-                return Promise.reject({reason: 'Last name must be between 3 to 10 symbols'})
+                return Promise.reject({reason: 'Last name must be between 3 to 10 symbols'});
             }
 
             if (!validator.validateSymbols(username)) {
-                return Promise.reject({reason: 'username cannot contains invalid symbols'})
+                return Promise.reject({reason: 'username cannot contains invalid symbols'});
             }
             if (!validator.validateSymbols(lastName)) {
-                return Promise.reject({reason: 'Last name cannot contains invalid symbols'})
+                return Promise.reject({reason: 'Last name cannot contains invalid symbols'});
             }
             if (!validator.validateSymbols(firstName)) {
-                return Promise.reject({reason: 'First name cannot contains invalid symbols'})
+                return Promise.reject({reason: 'First name cannot contains invalid symbols'});
             }
 
             var user = new User({
@@ -89,6 +90,14 @@ module.exports = function (models) {
             });
         },
         attachTripToUserAsDriver(tripId, username, from, to) {
+
+            if (!validator.validateSymbols(from)) {
+                return Promise.reject({reason: 'from cannot contains invalid symbols'})
+            }
+            if (!validator.validateSymbols(to)) {
+                return Promise.reject({reason: 'to cannot contains invalid symbols'})
+            }
+
             return new Promise((resolve, reject) => {
                 User.update({'username': username},
                     {
@@ -108,6 +117,14 @@ module.exports = function (models) {
             })
         },
         attachTripToUserAsPassenger(tripId, username, from, to) {
+
+            if (!validator.validateSymbols(from)) {
+                return Promise.reject({reason: 'from cannot contains invalid symbols'})
+            }
+            if (!validator.validateSymbols(to)) {
+                return Promise.reject({reason: 'to cannot contains invalid symbols'})
+            }
+
             return new Promise((resolve, reject) => {
                 User.update({'username': username},
                     {
@@ -127,9 +144,14 @@ module.exports = function (models) {
             })
         },
         updateUserRating(userId, rating, giveUserId){
+
             let checkRating = +rating
+
+            if (!validator.isNumber(checkRating)) {
+                return Promise.reject({reason: 'rating must be a number'});
+            }
             if (rating < 1 || rating > 10) {
-                return Promise.reject({reason: 'invalid rating'})
+                return Promise.reject({reason: 'invalid rating'});
             }
             return new Promise((resolve, reject) => {
                 User.findByIdAndUpdate(userId, {$push: {ratings: {userId: giveUserId, rating}}}, {
