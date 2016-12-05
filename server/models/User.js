@@ -32,9 +32,9 @@ userSchema.method({
 
 userSchema.method({
     isVotedAlready: function (userId) {
-        if(this._id == userId){
-        return false;
-        }        
+        if (this._id == userId) {
+            return false;
+        }
         let isAlreadyVoted = false;
         for (var item of this.ratings) {
             if (item.userId == userId) {

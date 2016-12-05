@@ -13,21 +13,22 @@ module.exports = function (models) {
                 price = tripToBeCreated.price,
                 slots = tripToBeCreated.slots,
                 passengers = [];
-          if(!validator.validateSymbols(from)){
-              return Promise.reject({reason:'from cannot contains invalid symbols'})
-          }
-           if(!validator.validateSymbols(to)){
-              return Promise.reject({reason:'to cannot contains invalid symbols'})
-          }
-           if(!validator.validateSymbols(date)){
-              return Promise.reject({reason:'date cannot contains invalid symbols'})
-          }
-           if(!validator.validateSymbols(price)){
-              return Promise.reject({reason:'price cannot contains invalid symbols'})
-          }
-            if(!validator.validateSymbols(slots)){
-              return Promise.reject({reason:'slot cannot contains invalid symbols'})
-          }
+
+            if (!validator.validateSymbols(from)) {
+                return Promise.reject({reason: 'from cannot contains invalid symbols'})
+            }
+            if (!validator.validateSymbols(to)) {
+                return Promise.reject({reason: 'to cannot contains invalid symbols'})
+            }
+            if (!validator.validateSymbols(date)) {
+                return Promise.reject({reason: 'date cannot contains invalid symbols'})
+            }
+            if (!validator.validateSymbols(price)) {
+                return Promise.reject({reason: 'price cannot contains invalid symbols'})
+            }
+            if (!validator.validateSymbols(slots)) {
+                return Promise.reject({reason: 'slot cannot contains invalid symbols'})
+            }
             var trip = new Trip({
                 username,
                 from,
