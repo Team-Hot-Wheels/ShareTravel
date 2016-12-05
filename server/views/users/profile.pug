@@ -1,20 +1,23 @@
 extends ../shared/layout
 block main-content
   
-  h1 Profile of #{data.username}
-   p= data.firstName
-   p= data.lastName
-   h2 Trips as driver
-   if (data.tripsAsDriver)
+  h1 Profile of #{data.username} 
+  h3 First name: 
+    span= data.firstName
+  h3 Last Name: 
+    span= data.lastName
+  h3 Trips as driver: 
+  if (data.tripsAsDriver)
      each trip in data.tripsAsDriver
         a(href='/trips/'+ trip.tripId) Trip from #{trip.from} to #{trip.to}
         br
-   h2 Trips as Passenger
-   if (data.tripsAsPassenger)
+  h3 Trips as Passenger: 
+  if (data.tripsAsPassenger)
      each trip in data.tripsAsPassenger
         a(href='/trips/'+ trip.tripId) Trip from #{trip.from} to #{trip.to}
         br 
-   if(currentUser && currentUser.username != data.username && !data.isVoted) 
+  if(currentUser && currentUser.username != data.username && !data.isVoted) 
+    | Rate this user: 
     div#rating-container.row
       div.col-md-2
         select.rating.form-control(name="rating" id=data._id)
@@ -30,7 +33,7 @@ block main-content
           option(value="10") 10
       div.col-md-4
           input#update-rating-btn.btn.btn-default.btn-primary(type="submit" value="Rate")
-   else if data.isVoted
+  else if data.isVoted
        span.text-error You have already voted for this user
   
   script(src="/bower_components/jquery/dist/jquery.js")
