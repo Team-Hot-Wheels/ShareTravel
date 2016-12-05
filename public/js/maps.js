@@ -1,8 +1,8 @@
 function initMap() {
 
-    var origin_place_id = null;
-    var destination_place_id = null;
-    var travel_mode = 'DRIVING';
+    var originPlaceId = null;
+    var destinationPlaceId = null;
+    var travelMode = 'DRIVING';
     var map = new google.maps.Map(document.getElementById('map'), {
         mapTypeControl: false,
         center: { lat: 42.6900, lng: 25.3624 },
@@ -12,18 +12,18 @@ function initMap() {
     var directionsDisplay = new google.maps.DirectionsRenderer;
     directionsDisplay.setMap(map);
 
-    var origin_input = document.getElementById('from');
-    var destination_input = document.getElementById('to');
+    var originInput = document.getElementById('from');
+    var destinationInput = document.getElementById('to');
 
     var opts = {
         types: ['(cities)'],
         componentRestrictions: { country: 'bg' }
     };
 
-    var origin_autocomplete = new google.maps.places.Autocomplete(origin_input, opts);
-    origin_autocomplete.bindTo('bounds', map);
-    var destination_autocomplete = new google.maps.places.Autocomplete(destination_input, opts);
-    destination_autocomplete.bindTo('bounds', map);
+    var originAutocomplete = new google.maps.places.Autocomplete(originInput, opts);
+    originAutocomplete.bindTo('bounds', map);
+    var destinationAutocomplete = new google.maps.places.Autocomplete(destinationInput, opts);
+    destinationAutocomplete.bindTo('bounds', map);
 
     function expandViewportToFitPlace(map, place) {
         if (place.geometry.viewport) {
@@ -34,9 +34,9 @@ function initMap() {
         }
     }
 
-    origin_autocomplete.addListener('place_changed', function () {
+    originAutocomplete.addListener('place_changed', function () {
 
-        var place = origin_autocomplete.getPlace();
+        var place = originAutocomplete.getPlace();
         if (!place.geometry) {
             window.alert("Autocomplete's returned place contains no geometry");
             return;
@@ -45,13 +45,13 @@ function initMap() {
 
         // If the place has a geometry, store its place ID and route if we have
         // the other place ID
-        origin_place_id = place.place_id;
-        route(origin_place_id, destination_place_id, travel_mode,
+        originPlaceId = place.place_id;
+        route(originPlaceId, destinationPlaceId, travelMode,
             directionsService, directionsDisplay);
     });
 
-    destination_autocomplete.addListener('place_changed', function () {
-        var place = destination_autocomplete.getPlace();
+    destinationAutocomplete.addListener('place_changed', function () {
+        var place = destinationAutocomplete.getPlace();
         if (!place.geometry) {
             window.alert("Autocomplete's returned place contains no geometry");
             return;
@@ -60,20 +60,20 @@ function initMap() {
 
         // If the place has a geometry, store its place ID and route if we have
         // the other place ID
-        destination_place_id = place.place_id;
-        route(origin_place_id, destination_place_id, travel_mode,
+        destinationPlaceId = place.place_id;
+        route(originPlaceId, destinationPlaceId, travelMode,
             directionsService, directionsDisplay);
     });
 
-    function route(origin_place_id, destination_place_id, travel_mode,
+    function route(originPlaceId, destinationPlaceId, travelMode,
         directionsService, directionsDisplay) {
-        if (!origin_place_id || !destination_place_id) {
+        if (!originPlaceId || !destinationPlaceId) {
             return;
         }
         directionsService.route({
-            origin: { 'placeId': origin_place_id },
-            destination: { 'placeId': destination_place_id },
-            travelMode: travel_mode,
+            origin: { 'placeId': originPlaceId },
+            destination: { 'placeId': destinationPlaceId },
+            travelMode: travelMode,
         }, function (response, status) {
             if (status === 'OK') {
                 directionsDisplay.setDirections(response);
