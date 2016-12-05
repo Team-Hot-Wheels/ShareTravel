@@ -5,5 +5,9 @@ module.exports = {
         }
 
         return true;
-    }
+    },
+    
+ isNumber:(n) => {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
 }

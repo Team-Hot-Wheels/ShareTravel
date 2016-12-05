@@ -13,6 +13,16 @@ module.exports = function (models) {
                 price = tripToBeCreated.price,
                 slots = tripToBeCreated.slots,
                 passengers = [];
+            
+            let priceToValidate = +price;
+            let slotsToValidate = +slots;
+
+            if(validator.isNumber(priceToValidate) && priceToValidate<0){
+                 return Promise.reject({reason: 'Price cannot be negative number'})
+            }
+            if(validator.isNumber(slotsToValidate)  && slotsToValidate<1){
+                 return Promise.reject({reason: 'slots cannot be negative number or 0'})
+            }
 
             if (!validator.validateSymbols(from)) {
                 return Promise.reject({reason: 'from cannot contains invalid symbols'})
