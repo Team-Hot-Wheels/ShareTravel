@@ -12,6 +12,6 @@ module.exports = {
     production: {
         rootPath: rootPath,
         db: 'mongodb://admin:admin@ds119718.mlab.com:19718/travelsharedb',
-        port: process.env.port
+        port: process.env.PORT
     }
 };
